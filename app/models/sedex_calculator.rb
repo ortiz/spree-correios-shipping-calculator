@@ -14,10 +14,17 @@ preference :cep_origem, :string
       :nCdEmpresa => '',
       :sDsSenha => '',
       :nCdServico => '40010', # Código do Sedex
+      :nCdFormato => 0.to_s,
+      :nVlComprimento => 0.to_s,
+      :nVlAltura => 0.to_s,
+      :nVlLargura => 0.to_s,
+      :nVlDiametro => 0.to_s,
       :sCdMaoPropria => 'N',
       :sCdAvisoRecebimento => 'N',
       :nVlPeso => peso_total.to_s,
-      :sCepOrigem => preferred_cep_origem
+      :sCepOrigem => preferred_cep_origem,
+      :sCepDestino => order.first.order.shipment.address.zipcode.to_s,
+      :nVlValorDeclarado => order.first.order.total.to_s
     }
 
     ws = CalcPrecoPrazoWSSoap.new

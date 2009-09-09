@@ -66,6 +66,11 @@ describe "SedexCalculator", "When there is weight" do
       :nCdEmpresa => '',
       :sDsSenha => '',
       :nCdServico => '40010', # Código do Sedex
+      :nCdFormato => 0.to_s,
+      :nVlComprimento => 0.to_s,
+      :nVlAltura => 0.to_s,
+      :nVlLargura => 0.to_s,
+      :nVlDiametro => 0.to_s,
       :sCdMaoPropria => 'N',
       :sCdAvisoRecebimento => 'N'
     }
@@ -83,18 +88,40 @@ describe "SedexCalculator", "When there is weight" do
     @calculator.compute([mock_line_item(:weight => 4)])
   end
 
+  it "should use order values" do
+    parameters = {
+      :sCepDestino => '04543900',
+      :nVlValorDeclarado => '10'
+    }
+
+    @ws.should_receive(:calcPrecoPrazo).with(hash_including(parameters)).and_return(@result)
+
+    ipod = mock_line_item :weight => 6
+    wii = mock_line_item :weight => 4
+
+    assert_equal @valor_ws_esperado, @calculator.compute([ipod, wii])
+  end
+
 end
 
 private
 
-  def mock_line_item(options)
+def mock_line_item(options)
 
-    defaults = {:weight => 0, :quantity => 1}
+  defaults = {:weight => 0, :quantity => 1, :order => mock_order}
 
-    options = defaults.merge options
+  options = defaults.merge options
 
-    variant = mock_model Variant, :weight => options[:weight]
-    line_item = mock_model LineItem, :variant => variant, :quantity => options[:quantity]
+  variant = mock_model Variant, :weight => options[:weight]
+  line_item = mock_model LineItem, :variant => variant, :quantity => options[:quantity], :order => options[:order]
 
-  end
+end
+
+def mock_order
+
+  address = mock_model Address, :zipcode => '04543900'
+  shipment = mock_model Shipment, :address => address
+  order = mock_model Order, :shipment => shipment, :total => '10'
+
+end
 
