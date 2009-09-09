@@ -102,6 +102,10 @@ describe "SedexCalculator", "When there is weight" do
     assert_equal @valor_ws_esperado, @calculator.compute([ipod, wii])
   end
 
+  it "should return the webservice result" do
+    assert_equal @result, @calculator.compute([mock_line_item(:weight => 4)])
+  end
+
 end
 
 private

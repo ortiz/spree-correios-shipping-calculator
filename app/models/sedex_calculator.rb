@@ -1,6 +1,15 @@
 class SedexCalculator < Calculator
 preference :cep_origem, :string
 
+  def self.description
+    I18n.t("sedex")
+  end
+
+  def self.register
+    super
+    ShippingMethod.register_calculator(self)
+  end
+
   def compute(order=nil)
     return 0 if order.nil? || order.empty?
 
