@@ -2,7 +2,7 @@ class SedexCalculator < Calculator
 preference :cep_origem, :string
 
   def self.description
-    I18n.t("sedex")
+    "Sedex"
   end
 
   def self.register
