@@ -10,10 +10,10 @@ preference :cep_origem, :string
     ShippingMethod.register_calculator(self)
   end
 
-  def compute(order=nil)
-    return 0 if order.nil? || order.empty?
+  def compute(line_items=nil)
+    return 0 if line_items.nil? || line_items.empty?
 
-    peso_total = order.sum do |item|
+    peso_total = line_items.sum do |item|
       item.variant.weight ? item.variant.weight * item.quantity : 0
     end
 
@@ -32,8 +32,8 @@ preference :cep_origem, :string
       :sCdAvisoRecebimento => 'N',
       :nVlPeso => peso_total.to_s,
       :sCepOrigem => preferred_cep_origem,
-      :sCepDestino => order.first.order.shipment.address.zipcode.to_s,
-      :nVlValorDeclarado => order.first.order.total.to_s
+      :sCepDestino => line_items.first.order.shipment.address.zipcode.to_s,
+      :nVlValorDeclarado => line_items.first.order.total.to_s
     }
 
     ws = CalcPrecoPrazoWSSoap.new

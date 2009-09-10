@@ -31,34 +31,34 @@ describe "SedexCalculator", "When there is weight" do
     @ws = mock_model CalcPrecoPrazoWSSoap
     CalcPrecoPrazoWSSoap.stub(:new).with(no_args()).and_return(@ws)
 
-    valor = mock 'valor', :valor => @valor_ws_esperado
+    valor = mock 'valor', :valor => @preco_obtido_pelo_ws
     calcPrecoPrazoResult = mock 'calcPrecoPrazoResult', :servicos => [valor]
-    @result = mock 'result', :calcPrecoPrazoResult => calcPrecoPrazoResult
+    @ws_response = mock 'result', :calcPrecoPrazoResult => calcPrecoPrazoResult
   end
 
   it "should return the ws result based on the weight sum of one variant" do
-    @ws.should_receive(:calcPrecoPrazo).with(hash_including(:nVlPeso => '1')).and_return(@result)
+    @ws.should_receive(:calcPrecoPrazo).with(hash_including(:nVlPeso => '1')).and_return(@ws_response)
 
     line_item = mock_line_item :weight => 1
 
-    assert_equal @valor_ws_esperado, @calculator.compute([line_item])
+    assert_equal @preco_obtido_pelo_ws, @calculator.compute([line_item])
   end
 
   it "should return the ws result based on the weight sum of two different variants" do
-    @ws.should_receive(:calcPrecoPrazo).with(hash_including(:nVlPeso => '10')).and_return(@result)
+    @ws.should_receive(:calcPrecoPrazo).with(hash_including(:nVlPeso => '10')).and_return(@ws_response)
 
     ipod = mock_line_item :weight => 6
     wii = mock_line_item :weight => 4
 
-    assert_equal @valor_ws_esperado, @calculator.compute([ipod, wii])
+    assert_equal @preco_obtido_pelo_ws, @calculator.compute([ipod, wii])
   end
 
   it "should return the ws result based on the weight sum of one variant where the quantity is two" do
-    @ws.should_receive(:calcPrecoPrazo).with(hash_including(:nVlPeso => '12')).and_return(@result)
+    @ws.should_receive(:calcPrecoPrazo).with(hash_including(:nVlPeso => '12')).and_return(@ws_response)
 
     ipod = mock_line_item :weight => 6, :quantity => 2
 
-    assert_equal @valor_ws_esperado, @calculator.compute([ipod])
+    assert_equal @preco_obtido_pelo_ws, @calculator.compute([ipod])
   end
 
   it "should send default parameters" do
@@ -75,7 +75,7 @@ describe "SedexCalculator", "When there is weight" do
       :sCdAvisoRecebimento => 'N'
     }
 
-    @ws.should_receive(:calcPrecoPrazo).with(hash_including(parameters)).and_return(@result)
+    @ws.should_receive(:calcPrecoPrazo).with(hash_including(parameters)).and_return(@ws_response)
 
     @calculator.compute([mock_line_item(:weight => 5)])
   end
@@ -83,7 +83,7 @@ describe "SedexCalculator", "When there is weight" do
   it "should use the preferred_cep_origem" do
     @calculator.should_receive(:preferred_cep_origem).and_return('04543900')
 
-    @ws.should_receive(:calcPrecoPrazo).with(hash_including(:sCepOrigem => '04543900')).and_return(@result)
+    @ws.should_receive(:calcPrecoPrazo).with(hash_including(:sCepOrigem => '04543900')).and_return(@ws_response)
 
     @calculator.compute([mock_line_item(:weight => 4)])
   end
@@ -94,16 +94,17 @@ describe "SedexCalculator", "When there is weight" do
       :nVlValorDeclarado => '10'
     }
 
-    @ws.should_receive(:calcPrecoPrazo).with(hash_including(parameters)).and_return(@result)
+    @ws.should_receive(:calcPrecoPrazo).with(hash_including(parameters)).and_return(@ws_response)
 
     ipod = mock_line_item :weight => 6
     wii = mock_line_item :weight => 4
 
-    assert_equal @valor_ws_esperado, @calculator.compute([ipod, wii])
+    assert_equal @preco_obtido_pelo_ws, @calculator.compute([ipod, wii])
   end
 
   it "should return the webservice result" do
-    assert_equal @result, @calculator.compute([mock_line_item(:weight => 4)])
+    @ws.should_receive(:calcPrecoPrazo).with(hash_including(:nVlPeso => "9")).and_return(@ws_response)
+    assert_equal @preco_obtido_pelo_ws, @calculator.compute([mock_line_item(:weight => 9)])
   end
 
 end
