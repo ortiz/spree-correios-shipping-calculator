@@ -1,4 +1,5 @@
-= Correios Shipping Calculator
+Correios Shipping Calculator
+============================
 
 Extensão do Spree para utilização do Sedex (WebService dos Correios)
 
