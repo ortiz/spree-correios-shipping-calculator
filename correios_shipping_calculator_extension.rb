@@ -3,8 +3,8 @@
 
 class CorreiosShippingCalculatorExtension < Spree::Extension
   version "1.0"
-  description "Describe your extension here"
-  url "http://yourwebsite.com/correios_shipping_calculator"
+  description "Extensão do Spree para utilização do Sedex (WebService dos Correios)"
+  url "http://github.com/ortiz/spree-correios-shipping-calculator/"
 
   def self.require_gems(config)
     config.gem "soap4r", :version => '>=1.5.0', :lib => false
