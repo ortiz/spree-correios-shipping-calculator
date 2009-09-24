@@ -12,15 +12,14 @@ INSTALAÇÃO
 
 Depois de baixar o Spree, execute o comando:
 
-  rake db:bootstrap
+  $ rake db:bootstrap
 
 Em seguida, instale a extension usando o comando:
 
-  script/extension install git://github.com/ortiz/spree-correios-shipping-calculator.git
+  $ script/extension install git://github.com/ortiz/spree-correios-shipping-calculator.git
 
 CONFIGURAÇÃO
 ============
-
 
 - Configurando Zonas:
 
