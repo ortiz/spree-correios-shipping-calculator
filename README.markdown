@@ -20,7 +20,7 @@ Em seguida, instale a extension usando o comando:
 CONFIGURAÇÃO
 ============
 
-Configurando Zonas:
+--Configurando Zonas:--
 
 No painel administrativo do Spree vá na aba "Configuration", em seguida no item "Zones". Clique no botão "New Zone", selecione o tipo "Country Based" e configure uma nova zona para o Brasil.
 
