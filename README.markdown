@@ -1,7 +1,10 @@
-Correios Shipping Calculator
+spree-correios-shipping-calculator
 ============================
+* Extension para integração do Spree com o cálculo de frete para Sedex (WebService dos Correios)
 
-Extensão do Spree para utilização do Sedex (WebService dos Correios)
+DESCRIÇÃO
+=========
+
 
 QUICK START
 ===========
