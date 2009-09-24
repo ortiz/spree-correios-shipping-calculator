@@ -2,12 +2,12 @@ spree-correios-shipping-calculator
 ============================
 * Extension para integração do Spree com o cálculo de frete para Sedex (WebService dos Correios)
 
-DESCRIÇÃO
-=========
+== DESCRIÇÃO
+
 Adiciona um calculator que utiliza o Webservice dos Correios e retorna o cálculo de frete para Sedex.
 
-INSTALAÇÃO
-==========
+== INSTALAÇÃO
+
 
 Depois de baixar o Spree, execute o comando:
 
@@ -17,10 +17,9 @@ Em seguida, instale a extension usando o comando:
 
   script/extension install git://github.com/ortiz/spree-correios-shipping-calculator.git
 
-CONFIGURAÇÃO
-============
+== CONFIGURAÇÃO
 
---Configurando Zonas:--
+Configurando Zonas:
 
 No painel administrativo do Spree vá na aba "Configuration", em seguida no item "Zones". Clique no botão "New Zone", selecione o tipo "Country Based" e configure uma nova zona para o Brasil.
 
