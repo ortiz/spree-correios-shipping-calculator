@@ -1,5 +1,6 @@
 == spree-correios-shipping-calculator
 
+
 * Extension para integração do Spree com o cálculo de frete para Sedex (WebService dos Correios)
 
 == DESCRIÇÃO
@@ -10,11 +11,11 @@ Adiciona um calculator que utiliza o Webservice dos Correios e retorna o cálcul
 
 Depois de baixar o Spree, execute o comando:
 
-  $ rake db:bootstrap
+  rake db:bootstrap
 
 Em seguida, instale a extension usando o comando:
 
-  $ script/extension install git://github.com/ortiz/spree-correios-shipping-calculator.git
+  script/extension install git://github.com/ortiz/spree-correios-shipping-calculator.git
 
 == CONFIGURAÇÃO
 
