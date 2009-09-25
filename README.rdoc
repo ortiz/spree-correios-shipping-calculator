@@ -34,3 +34,4 @@ No painel administrativo do Spree vá na aba "Configuration", em seguida no item
 No painel administrativo do Spree vá na aba "Products", em seguida clique em "edit", no produto desejado. Para configurar o peso do produto é necessário que o mesmo tenha "Option Types" e "Variants" configurada.
 
 Na variant do produto que foi exibida, clique em "edit", em seguida configure o "Weight" e clique em "Update".
+
